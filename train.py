@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime, timezone
 from xgboost import XGBClassifier
 from sklearn.model_selection import StratifiedKFold, cross_val_score
-from sklearn.metrics import roc_auc_score, f1_score, confusion_matrix, average_precision_score
+from sklearn.metrics import roc_auc_score, f1_score, confusion_matrix, average_precision_score, precision_score, recall_score
 
 from helpers.functions import treat_missing_values, train_test_split_data
 import json
@@ -64,9 +64,13 @@ def main():
                                 importance_type="gain", random_state=10, scale_pos_weight=class_ratio)        
     final_model.fit(X_train[top10], y_train)
     y_pred = final_model.predict(X_test[top10])
+    y_proba = final_model.predict_proba(X_test[top10])[:, 1]
     print("Test F1 Score (class1):", f1_score(y_test, y_pred, pos_label=1))
     print("Test F1 Score (class0):", f1_score(y_test, y_pred, pos_label=0))
-    print("Test Average Precision Score:", average_precision_score(y_test, y_pred))
+    print("Test Precision Score (class1):", precision_score(y_test, y_pred, pos_label=1))
+    print("Test Recall Score (class1):", recall_score(y_test, y_pred, pos_label=1))
+    print("Test ROC-AUC Score:", roc_auc_score(y_test, y_proba))
+    print("Test Average Precision Score:", average_precision_score(y_test, y_proba))
     print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
     # Step 7: Save the trained model to score it on new population
