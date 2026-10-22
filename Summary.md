@@ -56,6 +56,7 @@ Given more time, I would have also tried:
 - Tuning the decision threshold on the predicted probabilities to find the best precision/recall trade-off
 - Alternative methods for feature selection
 - Evaluating model performance across different patient segments
+- Remove highly correlated features
 
 ### AI usage disclaimer
 
