@@ -1,0 +1,30 @@
+cat_cols:
+  - sex
+  - state
+  - smoker
+  - has_chf
+  - has_copd
+  - has_diabetes
+  - has_ckd
+  - prior_inpatient_admission
+
+num_cols:
+  - age
+  - n_chronic_conditions
+  - n_encounters_last_year
+  - n_ed_visits_last_year
+  - n_active_medications
+  - hba1c
+  - egfr
+  - bmi
+  - systolic_bp
+  - discharge_summary_count
+
+target_col: hospitalized_next_year
+
+training_data_path: data/patients.csv
+
+model_save_path: models/xgb_model.json
+
+leaky-features:
+  - discharge_summary_count

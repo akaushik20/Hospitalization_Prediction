@@ -3,3 +3,5 @@ numpy
 scikit-learn
 ydata-profiling
 setuptools<81  # pkg_resources, required by ydata-profiling, was removed in setuptools 81+
+PyYAML
+xgboost
