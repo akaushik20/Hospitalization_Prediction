@@ -17,13 +17,13 @@ I started with EDA (`eda.py`) to explore the data. I used ydata-profiling, which
 
 - Dropped the 89 duplicate rows, since it's a small number and won't impact overall performance.
 - Removed `discharge_summary_count` because it's a leaky feature. When I ran the model with it, the F1 score was 0.95.
-- If I had more time, I would have removed one feature from each highly correlated pair to reduce the risk of multicollinearity.
+- I would have removed one feature from each highly correlated pair to reduce the risk of multicollinearity.
 
 ### Modeling approach and why
 
 - I used XGBoost because it performs well on imbalanced classification problems.
 - I set XGBoost's `scale_pos_weight` parameter to the ratio of negative to positive classes in the training set, so the model gives more weight to the minority class. I don't think oversampling or undersampling actually helps much in an imbalanced classification problem.
-- Instead of encoding the categorical columns with a label encoder or target encoder, I converted them to the pandas `category` type and set `enable_categorical=True`. This lets XGBoost split on groups of categories directly, without imposing an artificial order (as label encoding does). If I had more time I would have experiented more with target_encoding 
+- Instead of encoding the categorical columns with a label encoder or target encoder, I converted them to the pandas `category` type and set `enable_categorical=True`. This lets XGBoost split on groups of categories directly, without imposing an artificial order (as label encoding does).  
 - Selected the top 10 features by gain, since they perform as well as the full feature set (5-fold CV on the training set):
   - F1 score with all features: 0.7676 ± 0.0048
   - F1 score with top 10 features: 0.7720 ± 0.0081
