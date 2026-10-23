@@ -50,8 +50,6 @@ I started with EDA (`eda.py`) to explore the data. I used ydata-profiling, which
 
 ### Next steps
 
-Given more time, I would have also tried:
-
 - Visualizing the ROC curve and the distribution of predicted probabilities for each class
 - Tuning the decision threshold on the predicted probabilities to find the best precision/recall trade-off
 - Alternative methods for feature selection
